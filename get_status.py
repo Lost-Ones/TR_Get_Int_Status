@@ -78,7 +78,7 @@ if __name__ == "__main__":
         temp = {}
         for item in v:
 
-            status_list = ['connected', 'notconnect','monitoring']
+            status_list = ['connected', 'notconnect', 'monitoring']
 
             for option in status_list:
                 if option in item:
@@ -92,6 +92,4 @@ if __name__ == "__main__":
     print('\n\n ---------------------------------------  Data Output --------------------------------------')
     print('\n -------------------------------------------------------------------------------------------\n')
     for k,v in interface_dict.items():
-        #print(k,v)
-        if {v["status"]}:
-            print(f'{k}, {v["status"]}')
+        print(f'{k}, {v["status"]}')
