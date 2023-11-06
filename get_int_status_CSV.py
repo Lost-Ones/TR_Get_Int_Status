@@ -1,4 +1,4 @@
-import re, sys
+import re, sys, csv
 from dataclasses import dataclass
 from collections import defaultdict
 
@@ -78,18 +78,31 @@ if __name__ == "__main__":
         temp = {}
         for item in v:
 
-            status_list = ['connected', 'notconnect', 'monitoring']
+            status_list = ['connected', 'notconnect','monitoring']
 
             for option in status_list:
                 if option in item:
                     status = option
-                    temp['status'] = status
+                    if status != {}:
+                        temp['status'] = status
 
 
-        interface_dict[k] = temp
+                    interface_dict[k] = temp
 
 
     print('\n\n ---------------------------------------  Data Output --------------------------------------')
     print('\n -------------------------------------------------------------------------------------------\n')
     for k,v in interface_dict.items():
+        #print(k,v)
+        #try: 
         print(f'{k}, {v["status"]}')
+        #except: print(f'Error: {k}: {v}')
+    print(interface_dict)
+    with open(f"Output.csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            
+            for k,v in interface_dict.items():
+                interface = k
+                status = v['status']
+                writer.writerow([interface, status])
+            csvfile.close()
